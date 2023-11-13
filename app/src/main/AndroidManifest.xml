@@ -15,7 +15,10 @@
         android:theme="@style/Theme.StoryAppSubmission"
         tools:targetApi="31">
         <activity
-            android:name=".view.signup.SignupActivity"
+            android:name=".view.addStory.AddStoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.register.RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".view.welcome.WelcomeActivity"

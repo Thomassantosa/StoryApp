@@ -1,4 +1,4 @@
-package com.example.storyappsubmission.view.signup
+package com.example.storyappsubmission.view.register
 
 import android.os.Build
 import android.os.Bundle
@@ -8,7 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.storyappsubmission.databinding.ActivitySignupBinding
 
-class SignupActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignupBinding
 

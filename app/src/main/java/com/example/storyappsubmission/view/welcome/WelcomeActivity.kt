@@ -11,7 +11,7 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.example.storyappsubmission.databinding.ActivityWelcomeBinding
 import com.example.storyappsubmission.view.login.LoginActivity
-import com.example.storyappsubmission.view.signup.SignupActivity
+import com.example.storyappsubmission.view.register.RegisterActivity
 
 class WelcomeActivity : AppCompatActivity() {
 
@@ -68,7 +68,7 @@ class WelcomeActivity : AppCompatActivity() {
         }
 
         binding.signupButton.setOnClickListener {
-            startActivity(Intent(this, SignupActivity::class.java))
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
 }

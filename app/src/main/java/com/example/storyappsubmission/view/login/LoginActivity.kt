@@ -3,23 +3,22 @@ package com.example.storyappsubmission.view.login
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
-import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.storyappsubmission.data.pref.UserModel
 import com.example.storyappsubmission.databinding.ActivityLoginBinding
 import com.example.storyappsubmission.helper.ViewModelFactory
 import com.example.storyappsubmission.view.main.MainActivity
+import com.example.storyappsubmission.view.register.RegisterViewModel
 
 class LoginActivity : AppCompatActivity() {
 
-    private val viewModel by viewModels<LoginViewModel> {
-        ViewModelFactory.getInstance(this)
-    }
-
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var loginViewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +26,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupView()
+        setupViewModel()
         setupAction()
     }
 
@@ -41,6 +41,25 @@ class LoginActivity : AppCompatActivity() {
             )
         }
         supportActionBar?.hide()
+    }
+
+    private fun setupViewModel() {
+        loginViewModel = ViewModelProvider(
+            this,
+            ViewModelFactory.getInstance(this)
+        )[LoginViewModel::class.java]
+
+        loginViewModel.isLoading.observe(this) {
+            showLoading(it)
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
     }
 
     private fun setupAction() {

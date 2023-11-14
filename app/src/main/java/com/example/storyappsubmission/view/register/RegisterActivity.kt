@@ -7,7 +7,6 @@ import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.storyappsubmission.R
@@ -91,15 +90,15 @@ class RegisterActivity : AppCompatActivity() {
                 }
             }
 
-            AlertDialog.Builder(this).apply {
-                setTitle("Yeah!")
-                setMessage("Akun dengan $email sudah jadi nih. Yuk, login dan belajar coding.")
-                setPositiveButton("Lanjut") { _, _ ->
-                    finish()
-                }
-                create()
-                show()
-            }
+//            AlertDialog.Builder(this).apply {
+//                setTitle("Yeah!")
+//                setMessage("Akun dengan $email sudah jadi nih. Yuk, login dan belajar coding.")
+//                setPositiveButton("Lanjut") { _, _ ->
+//                    finish()
+//                }
+//                create()
+//                show()
+//            }
         }
     }
 }

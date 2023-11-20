@@ -35,4 +35,6 @@
     <string name="gallery">Gallery</string>
     <string name="upload">Upload</string>
 
+    <string name="Logout">Logout</string>
+
 </resources>

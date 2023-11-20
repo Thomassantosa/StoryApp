@@ -1,23 +1,18 @@
 package com.example.storyappsubmission.view.main
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.view.WindowInsets
-import android.view.WindowManager
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.storyappsubmission.R
+import com.example.storyappsubmission.adapter.ListStoryAdapter
 import com.example.storyappsubmission.data.responses.ListStoryItem
 import com.example.storyappsubmission.databinding.ActivityMainBinding
 import com.example.storyappsubmission.helper.ViewModelFactory
 import com.example.storyappsubmission.view.addStory.AddStoryActivity
 import com.example.storyappsubmission.view.login.LoginActivity
-import com.example.storyappsubmission.view.login.LoginViewModel
-import com.example.storyappsubmission.view.welcome.WelcomeActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -76,8 +71,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setStoriesData(stories: List<ListStoryItem>) {
-        val listUserAdapter = ListStoryAdapter(stories)
-        binding.rvUser.adapter = listUserAdapter
+        binding.rvUser.adapter = ListStoryAdapter(stories)
     }
 
     private fun showLoading(isLoading: Boolean) {

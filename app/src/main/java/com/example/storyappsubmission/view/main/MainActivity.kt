@@ -12,7 +12,7 @@ import com.example.storyappsubmission.data.responses.ListStoryItem
 import com.example.storyappsubmission.databinding.ActivityMainBinding
 import com.example.storyappsubmission.helper.ViewModelFactory
 import com.example.storyappsubmission.view.addStory.AddStoryActivity
-import com.example.storyappsubmission.view.login.LoginActivity
+import com.example.storyappsubmission.view.welcome.WelcomeActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,29 +21,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        setupViewModel()
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val layoutManager = LinearLayoutManager(this)
         binding.rvUser.layoutManager = layoutManager
 
-//        setupView()
-        setupViewModel()
         setupAction()
     }
-
-//    private fun setupView() {
-//        @Suppress("DEPRECATION")
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-//            window.insetsController?.hide(WindowInsets.Type.statusBars())
-//        } else {
-//            window.setFlags(
-//                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-//                WindowManager.LayoutParams.FLAG_FULLSCREEN
-//            )
-//        }
-//        supportActionBar?.hide()
-//    }
 
     private fun setupViewModel() {
         mainViewModel = ViewModelProvider(
@@ -56,7 +44,7 @@ class MainActivity : AppCompatActivity() {
                 binding.greeting.text = getString(R.string.greeting, user.name)
                 mainViewModel.getStory(user.token)
             } else {
-                startActivity(Intent(this, LoginActivity::class.java))
+                startActivity(Intent(this, WelcomeActivity::class.java))
                 finish()
             }
         }

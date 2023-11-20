@@ -13,12 +13,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.storyappsubmission.R
 import com.example.storyappsubmission.data.responses.ListStoryItem
+import com.example.storyappsubmission.databinding.StoryItemBinding
 import com.example.storyappsubmission.view.detailstory.DetailStoryActivity
 
 class ListStoryAdapter(private val listStory: List<ListStoryItem>) : RecyclerView.Adapter<ListStoryAdapter.ListViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.story_item, parent, false)
-        return ListViewHolder(view)
+        return ListViewHolder(StoryItemBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        ))
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
@@ -27,12 +31,12 @@ class ListStoryAdapter(private val listStory: List<ListStoryItem>) : RecyclerVie
 
     override fun getItemCount(): Int = listStory.size
 
-    class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ListViewHolder(binding: StoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        private var imgPhoto: ImageView = itemView.findViewById(R.id.image)
-        private var tvName: TextView = itemView.findViewById(R.id.name)
-        private var tvDescription: TextView = itemView.findViewById(R.id.description)
-        private var tvTimeStamp: TextView = itemView.findViewById(R.id.timestamp)
+        private var imgPhoto: ImageView = binding.image
+        private var tvName: TextView = binding.name
+        private var tvDescription: TextView = binding.description
+        private var tvTimeStamp: TextView = binding.timestamp
 
         fun bind(storyItem: ListStoryItem) {
 

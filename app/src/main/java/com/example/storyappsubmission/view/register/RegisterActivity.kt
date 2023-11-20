@@ -70,7 +70,7 @@ class RegisterActivity : AppCompatActivity() {
 
             if (name.isEmpty()) {
                 binding.nameEditText.error = getString(R.string.name_not_empty)
-            } else if (binding.emailEditText.error.isEmpty() && binding.passwordEditText.error.isEmpty()) {
+            } else if (binding.emailEditText.error.isNullOrEmpty() && binding.passwordEditText.error.isNullOrEmpty()) {
                 val registerRequest = RegisterRequest(name, email, password)
                 registerViewModel.registerUser(registerRequest)
 

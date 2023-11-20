@@ -69,7 +69,7 @@ class LoginActivity : AppCompatActivity() {
             val email = binding.emailEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
 
-            if (binding.emailEditText.error.isEmpty() && binding.passwordEditText.error.isEmpty()) {
+            if (binding.emailEditText.error.isNullOrEmpty() && binding.passwordEditText.error.isNullOrEmpty()) {
                 val loginRequest = LoginRequest(email, password)
                 loginViewModel.loginUser(loginRequest)
 

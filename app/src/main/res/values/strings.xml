@@ -30,4 +30,9 @@
     <string name="description">description</string>
     <string name="timestamp">timestamp</string>
 
+    <string name="back">Back</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="upload">Upload</string>
+
 </resources>

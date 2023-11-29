@@ -12,7 +12,8 @@ import com.example.storyappsubmission.data.repository.Repository
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore("settings")
 object Injection {
     fun provideRepository(context: Context): Repository {
-        val pref = UserPreference.getInstance(context.dataStore)
+        val dataStore = context.dataStore
+        val pref = UserPreference.getInstance(dataStore)
         val apiService = ApiConfig().getApiService()
         return Repository(apiService, pref)
     }

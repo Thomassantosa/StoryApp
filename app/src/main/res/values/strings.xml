@@ -37,4 +37,7 @@
 
     <string name="Logout">Logout</string>
 
+    <string name="map">map</string>
+    <string name="title_activity_maps">MapsActivity</string>
+
 </resources>

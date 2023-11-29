@@ -3,6 +3,7 @@ package com.example.storyappsubmission.data.api
 import com.example.storyappsubmission.data.request.LoginRequest
 import com.example.storyappsubmission.data.request.RegisterRequest
 import com.example.storyappsubmission.data.responses.ErrorResponse
+import com.example.storyappsubmission.data.responses.LocationResponse
 import com.example.storyappsubmission.data.responses.LoginResponse
 import com.example.storyappsubmission.data.responses.RegisterResponse
 import com.example.storyappsubmission.data.responses.StoryResponse
@@ -15,6 +16,7 @@ import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
+import retrofit2.http.Query
 
 interface ApiService {
 
@@ -40,4 +42,10 @@ interface ApiService {
         @Part file: MultipartBody.Part,
         @Part("description") description: RequestBody,
     ): Call<ErrorResponse>
+
+    @GET("/v1/stories")
+    fun storyLocation(
+        @Header("Authorization") token: String,
+        @Query("location") queryParam: String
+    ): Call<LocationResponse>
 }

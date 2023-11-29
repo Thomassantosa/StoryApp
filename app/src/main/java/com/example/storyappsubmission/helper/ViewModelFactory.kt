@@ -8,6 +8,7 @@ import com.example.storyappsubmission.dependencyInjection.Injection
 import com.example.storyappsubmission.view.addStory.AddStoryViewModel
 import com.example.storyappsubmission.view.login.LoginViewModel
 import com.example.storyappsubmission.view.main.MainViewModel
+import com.example.storyappsubmission.view.map.MapsViewModel
 import com.example.storyappsubmission.view.register.RegisterViewModel
 
 class ViewModelFactory(private val repository: Repository) : ViewModelProvider.NewInstanceFactory() {
@@ -27,6 +28,9 @@ class ViewModelFactory(private val repository: Repository) : ViewModelProvider.N
             modelClass.isAssignableFrom(AddStoryViewModel::class.java) -> {
                 AddStoryViewModel(repository) as T
             }
+            modelClass.isAssignableFrom(MapsViewModel::class.java) -> {
+                MapsViewModel(repository) as T
+            }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }
@@ -38,7 +42,9 @@ class ViewModelFactory(private val repository: Repository) : ViewModelProvider.N
         fun getInstance(context: Context): ViewModelFactory {
             if (INSTANCE == null) {
                 synchronized(ViewModelFactory::class.java) {
-                    INSTANCE = ViewModelFactory(Injection.provideRepository(context))
+                    INSTANCE = com.example.storyappsubmission.helper.ViewModelFactory(
+                        Injection.provideRepository(context)
+                    )
                 }
             }
             return INSTANCE as ViewModelFactory

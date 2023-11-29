@@ -34,6 +34,7 @@
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
     <string name="upload">Upload</string>
+    <string name="upload_loc_info">Upload with location information</string>
 
     <string name="Logout">Logout</string>
 

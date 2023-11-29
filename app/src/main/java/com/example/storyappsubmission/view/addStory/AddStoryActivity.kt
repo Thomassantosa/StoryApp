@@ -1,13 +1,16 @@
 package com.example.storyappsubmission.view.addStory
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.Intent.ACTION_GET_CONTENT
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -33,10 +36,46 @@ class AddStoryActivity : AppCompatActivity() {
     private lateinit var addStoryViewModel: AddStoryViewModel
     private var getFile: File? = null
     private var token: String? = null
+    private var latitude : Double? = null
+    private var longitude : Double? = null
 
-    companion object {
-        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
-        private const val REQUEST_CODE_PERMISSIONS = 10
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                getMyLocation()
+            }
+        }
+
+    private fun getMyLocation(): Pair<Double?, Double?> {
+        if (ContextCompat.checkSelfPermission(
+                this.applicationContext,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
+            try {
+                val location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                    ?: locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+
+                location?.let {
+                    val latitude = location.latitude
+                    val longitude = location.longitude
+
+                    return Pair(latitude, longitude)
+                }
+            } catch (exception: SecurityException) {
+                Log.e("Location", "Error: ${exception.localizedMessage}")
+                return Pair(null, null)
+            }
+        } else {
+            requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+            return Pair(null, null)
+        }
+
+        return Pair(null, null)
     }
 
     private lateinit var currentPhotoPath: String
@@ -149,7 +188,13 @@ class AddStoryActivity : AppCompatActivity() {
                 requestImageFile
             )
 
-            addStoryViewModel.createStory(token!!, imageMultipart, description)
+            if (binding.checkbox.isChecked){
+                val (lat, long) = getMyLocation()
+                latitude = lat
+                longitude = long
+            }
+
+            addStoryViewModel.createStory(token!!, imageMultipart, description, latitude, longitude)
 
             addStoryViewModel.addStoryResponse.observe(this) { response ->
                 Toast.makeText(this, response.message, Toast.LENGTH_SHORT).show()
@@ -169,5 +214,10 @@ class AddStoryActivity : AppCompatActivity() {
             Toast.makeText(this@AddStoryActivity, "Please insert an image file first."
                 , Toast.LENGTH_SHORT).show()
         }
+    }
+
+    companion object {
+        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+        private const val REQUEST_CODE_PERMISSIONS = 10
     }
 }

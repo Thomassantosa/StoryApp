@@ -27,10 +27,10 @@ class AddStoryViewModel(private val repository: Repository) : ViewModel() {
     private val _errorResponse = MutableLiveData<ErrorResponse>()
     val errorResponse: LiveData<ErrorResponse> = _errorResponse
 
-    fun createStory(token:String, imageMultipart: MultipartBody.Part, description : RequestBody){
+    fun createStory(token:String, imageMultipart: MultipartBody.Part, description : RequestBody, lat:Double?, lon:Double?){
         _isLoading.value = true
         val apiService = ApiConfig().getApiService()
-        val uploadImageRequest = apiService.uploadImage("Bearer $token", imageMultipart, description)
+        val uploadImageRequest = apiService.uploadImage("Bearer $token", imageMultipart, description, lat, lon)
 
         uploadImageRequest.enqueue(object : Callback<ErrorResponse> {
             override fun onResponse(

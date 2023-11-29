@@ -80,4 +80,7 @@ dependencies {
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1") //TestDispatcher
     testImplementation("org.mockito:mockito-core:3.12.4")
     testImplementation("org.mockito:mockito-inline:3.12.4")
+
+    // Maps
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
 }

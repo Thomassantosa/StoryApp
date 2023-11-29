@@ -79,12 +79,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    data class TourismPlace(
-        val name: String,
-        val latitude: Double,
-        val longitude: Double
-    )
-
     private fun addManyMarker(listStoryMap: List<ListStoryLocationItem>) {
 
         listStoryMap.forEach { listStory ->

@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.storyappsubmission.R
@@ -15,13 +16,14 @@ import com.example.storyappsubmission.adapter.LoadingStateAdapter
 import com.example.storyappsubmission.databinding.ActivityMainBinding
 import com.example.storyappsubmission.helper.ViewModelFactory
 import com.example.storyappsubmission.view.addStory.AddStoryActivity
+import com.example.storyappsubmission.view.map.MapsActivity
 import com.example.storyappsubmission.view.welcome.WelcomeActivity
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var factory: ViewModelFactory
     private lateinit var binding: ActivityMainBinding
-    private lateinit var mainViewModel: MainViewModel
+    private val mainViewModel: MainViewModel by viewModels { factory }
     private lateinit var adapter: ListStoryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +37,7 @@ class MainActivity : AppCompatActivity() {
 
         setupViewModel()
         setupView(this)
+        getStories()
         setupAction()
     }
 
@@ -94,6 +97,9 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.menuLogout -> {
                 mainViewModel.logout()
+            }
+            R.id.story_map ->{
+                startActivity(Intent(this, MapsActivity::class.java))
             }
         }
         return super.onOptionsItemSelected(item)

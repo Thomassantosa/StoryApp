@@ -1,13 +1,16 @@
 package com.example.storyappsubmission.data.repository
 
 import android.content.ContentValues
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import androidx.paging.liveData
 import com.example.storyappsubmission.data.api.ApiService
+import com.example.storyappsubmission.data.pagingsource.StoryPagingSource
 import com.example.storyappsubmission.data.pref.UserPreference
 import com.example.storyappsubmission.data.responses.ListStoryItem
 import com.example.storyappsubmission.data.responses.LocationResponse
@@ -15,7 +18,6 @@ import com.example.storyappsubmission.data.responses.LoginResult
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import android.util.Log
 
 class Repository(private val apiService: ApiService, private val userPreference: UserPreference) {
 
@@ -37,7 +39,7 @@ class Repository(private val apiService: ApiService, private val userPreference:
                 pageSize = 5
             ),
             pagingSourceFactory = {
-                StoryPagingSource(apiService, pref.getToken())
+                StoryPagingSource(apiService, userPreference.getToken())
             }
         ).liveData
     }

@@ -1,16 +1,21 @@
 package com.example.storyappsubmission.data.pref
 
-import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.datastore.preferences.preferencesDataStore
 import com.example.storyappsubmission.data.responses.LoginResult
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.runBlocking
 
 class UserPreference private constructor(private val dataStore: DataStore<Preferences>) {
+
+    fun getToken(): String {
+        val preferences = runBlocking { dataStore.data.first() }
+        return preferences[TOKEN_KEY] ?: ""
+    }
 
     suspend fun login(user: LoginResult) {
         dataStore.edit { prefereces ->

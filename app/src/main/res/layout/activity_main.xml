@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.main.MainActivity">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/greeting"
@@ -42,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/create_status_capt"
-        app:layout_constraintBottom_toTopOf="@+id/rvUser"
+        app:layout_constraintBottom_toTopOf="@+id/rvStory"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="14dp"
@@ -53,7 +52,7 @@
         />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvUser"
+        android:id="@+id/rvStory"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
